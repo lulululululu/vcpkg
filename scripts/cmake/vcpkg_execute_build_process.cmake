@@ -142,13 +142,14 @@ function(vcpkg_execute_build_process)
                 list(APPEND STRINGIFIED_LOGS "    ${NATIVE_LOG}\n")
             endforeach()
             vcpkg_prettify_command(_ebp_COMMAND _ebp_COMMAND_PRETTY)
+            list(GET LOGS 1 MY_ERROR_LOG)
+            file(READ ${MY_ERROR_LOG} MY_ERROR_LOG_CONTENT)
+            message(WARNING ${MY_ERROR_LOG_CONTENT})
             message(FATAL_ERROR
                 "  Command failed: ${_ebp_COMMAND_PRETTY}\n"
                 "  Working Directory: ${_ebp_WORKING_DIRECTORY}\n"
                 "  See logs for more information:\n"
                 ${STRINGIFIED_LOGS})
-            file(READ ${list(GET LOGS 1 MY_ERROR_LOG)})
-            message(DEBUG ${MY_ERROR_LOG})
         endif(error_code)
     endif(error_code)
 endfunction(vcpkg_execute_build_process)
