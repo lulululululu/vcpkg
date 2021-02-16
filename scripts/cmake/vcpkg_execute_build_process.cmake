@@ -147,7 +147,7 @@ function(vcpkg_execute_build_process)
                 "  Working Directory: ${_ebp_WORKING_DIRECTORY}\n"
                 "  See logs for more information:\n"
                 ${STRINGIFIED_LOGS})
-            file(READ ${list(GET STRINGIFIED_LOGS 1 MY_ERROR_LOG)})
+            file(READ ${list(GET LOGS 1 MY_ERROR_LOG)})
             message(DEBUG ${MY_ERROR_LOG})
         endif(error_code)
     endif(error_code)
